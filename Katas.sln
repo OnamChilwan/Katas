@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Codility", "Codility", "{8CDE5BBB-DFF5-463E-8BD6-2EEED88617CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinaryGap", "BinaryGap\BinaryGap.csproj", "{C9E8B783-8850-4190-B138-E8C77F702EB3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRotation", "CyclicRotation\CyclicRotation.csproj", "{436F9CA5-127D-405F-ADBC-D35D087623C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OddOccurrencesInArray", "OddOccurrencesInArray\OddOccurrencesInArray.csproj", "{A8F91214-9F90-4D22-BB40-128E9B1869AC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrogJmp", "FrogJmp\FrogJmp.csproj", "{DDA53BCF-1C96-4C28-A290-B774BDD1D208}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PermMissingElement", "PermMissingElement\PermMissingElement.csproj", "{06050518-1B5A-4750-857D-089E75A5886D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TapeEquilibrium", "TapeEquilibrium\TapeEquilibrium.csproj", "{68A30023-E509-4D06-A0C1-6530CC9C6D07}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{55C47A5D-363B-4CCF-A9A1-93B2D61645F2}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9E8B783-8850-4190-B138-E8C77F702EB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9E8B783-8850-4190-B138-E8C77F702EB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9E8B783-8850-4190-B138-E8C77F702EB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9E8B783-8850-4190-B138-E8C77F702EB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{436F9CA5-127D-405F-ADBC-D35D087623C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{436F9CA5-127D-405F-ADBC-D35D087623C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{436F9CA5-127D-405F-ADBC-D35D087623C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{436F9CA5-127D-405F-ADBC-D35D087623C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8F91214-9F90-4D22-BB40-128E9B1869AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8F91214-9F90-4D22-BB40-128E9B1869AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8F91214-9F90-4D22-BB40-128E9B1869AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8F91214-9F90-4D22-BB40-128E9B1869AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDA53BCF-1C96-4C28-A290-B774BDD1D208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDA53BCF-1C96-4C28-A290-B774BDD1D208}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDA53BCF-1C96-4C28-A290-B774BDD1D208}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDA53BCF-1C96-4C28-A290-B774BDD1D208}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06050518-1B5A-4750-857D-089E75A5886D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06050518-1B5A-4750-857D-089E75A5886D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06050518-1B5A-4750-857D-089E75A5886D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06050518-1B5A-4750-857D-089E75A5886D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A30023-E509-4D06-A0C1-6530CC9C6D07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A30023-E509-4D06-A0C1-6530CC9C6D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A30023-E509-4D06-A0C1-6530CC9C6D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A30023-E509-4D06-A0C1-6530CC9C6D07}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C9E8B783-8850-4190-B138-E8C77F702EB3} = {8CDE5BBB-DFF5-463E-8BD6-2EEED88617CD}
+		{436F9CA5-127D-405F-ADBC-D35D087623C3} = {8CDE5BBB-DFF5-463E-8BD6-2EEED88617CD}
+		{A8F91214-9F90-4D22-BB40-128E9B1869AC} = {8CDE5BBB-DFF5-463E-8BD6-2EEED88617CD}
+		{DDA53BCF-1C96-4C28-A290-B774BDD1D208} = {8CDE5BBB-DFF5-463E-8BD6-2EEED88617CD}
+		{06050518-1B5A-4750-857D-089E75A5886D} = {8CDE5BBB-DFF5-463E-8BD6-2EEED88617CD}
+		{68A30023-E509-4D06-A0C1-6530CC9C6D07} = {8CDE5BBB-DFF5-463E-8BD6-2EEED88617CD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3063B926-6024-47F5-A049-5557ED59634A}
+	EndGlobalSection
+EndGlobal
