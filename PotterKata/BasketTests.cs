@@ -30,6 +30,7 @@ namespace PotterKata
                 .Then(_ => Basket_Is_Not_Empty())
                 .And(_ => Basket_Contains_X_Number_Of_BookSets(2))
                 .And(_ => Each_BookSet_Contains_X_Number_Books(1))
+                .And(_ => Basket_Total_Is(16))
                 .BDDfy();
         }
 
