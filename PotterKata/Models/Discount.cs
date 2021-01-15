@@ -15,19 +15,14 @@
         
         public static Discount Create(int numberOfBooks)
         {
-            switch (numberOfBooks)
+            return numberOfBooks switch
             {
-                case 2:
-                    return new Discount(FivePercentDiscount);
-                case 3:
-                    return new Discount(TenPercentDiscount);
-                case 4:
-                    return new Discount(TwentyPercentDiscount);
-                case 5:
-                    return new Discount(TwentyFivePercentDiscount);
-            }
-            
-            return new Discount(NoDiscount);
+                2 => new Discount(FivePercentDiscount),
+                3 => new Discount(TenPercentDiscount),
+                4 => new Discount(TwentyPercentDiscount),
+                5 => new Discount(TwentyFivePercentDiscount),
+                _ => new Discount(NoDiscount)
+            };
         }
 
         public double Rate { get; }
