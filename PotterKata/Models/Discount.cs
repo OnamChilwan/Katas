@@ -9,7 +9,7 @@
         
         public static Discount Create(int numberOfBooks)
         {
-            throw new System.NotImplementedException();
+            return new Discount(0.95);
         }
 
         public double Rate { get; }
