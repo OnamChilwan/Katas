@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace PotterKata.Models
 {
     public class Basket
     {
         public List<BookSet> BasketItems { get; }
+        
+        public double Total => BasketItems.Sum(x => x.Books.Count * 8);
 
         private Basket()
         {
@@ -47,7 +50,5 @@ namespace PotterKata.Models
                 AddBook(book);
             }
         }
-
-        public double Total => 8;
     }
 }
