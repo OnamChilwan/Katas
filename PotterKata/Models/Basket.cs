@@ -47,5 +47,7 @@ namespace PotterKata.Models
                 AddBook(book);
             }
         }
+
+        public double Total => 0;
     }
 }

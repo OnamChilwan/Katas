@@ -17,9 +17,10 @@ namespace PotterKata
             this.Given(_ => An_Empty_Basket())
                 .When(_ => Book_Is_Added_To_Basket(new Book(HarryPotterSeries.Philosophers_Stone)))
                 .Then(_ => Basket_Is_Not_Empty())
+                .And(_ => Basket_Total_Is(8))
                 .BDDfy();
         }
-        
+
         [Test]
         public void AddingSameBookTwiceToBasket()
         {
@@ -75,6 +76,11 @@ namespace PotterKata
         private void Books_Are_Added_To_Basket(IEnumerable<Book> books)
         {
             _subject.AddBooks(books);
+        }
+
+        private void Basket_Total_Is(double expectedTotal)
+        {
+            Assert.That(_subject.Total, Is.EqualTo(expectedTotal));
         }
     }
 }
