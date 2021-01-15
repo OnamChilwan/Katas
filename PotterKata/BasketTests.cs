@@ -26,7 +26,13 @@ namespace PotterKata
             this.Given(_ => An_Empty_Basket())
                 .When(_ => Books_Are_Added_To_Basket(books))
                 .Then(_ => Basket_Is_Not_Empty())
+                .Then(_ => Basket_Contains_X_Number_Of_Items(2))
                 .BDDfy();
+        }
+
+        private void Basket_Contains_X_Number_Of_Items(int numberOfItems)
+        {
+            Assert.That(_subject.BasketItems.Count, Is.EqualTo(numberOfItems));
         }
 
         private void An_Empty_Basket()
@@ -43,7 +49,6 @@ namespace PotterKata
         {
             _subject.AddBooks(books);
         }
-        
 
         private void Basket_Is_Not_Empty()
         {
