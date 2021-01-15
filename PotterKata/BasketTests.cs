@@ -26,8 +26,17 @@ namespace PotterKata
                 .When(_ => Book_Is_Added_To_Basket(new Book(HarryPotterSeries.Philosophers_Stone)))
                 .And(_ => Book_Is_Added_To_Basket(new Book(HarryPotterSeries.Philosophers_Stone)))
                 .Then(_ => Basket_Is_Not_Empty())
-                .Then(_ => Basket_Contains_X_Number_Of_Items(2))
+                .And(_ => Basket_Contains_X_Number_Of_Items(2))
+                .And(_ => Each_BookSet_Contains_X_Number_Books(1))
                 .BDDfy();
+        }
+
+        private void Each_BookSet_Contains_X_Number_Books(int i)
+        {
+            foreach (var item in _subject.BasketItems)
+            {
+                Assert.That(item.Books.Count, Is.EqualTo(i));
+            }
         }
 
         [Test]
@@ -77,6 +86,26 @@ namespace PotterKata
         Half_Blood_Prince = 6,
         Deathly_Hallows = 7
     }
+
+    public class BookSet
+    {
+        public List<Book> Books { get; }
+
+        private BookSet()
+        {
+            Books = new List<Book>();
+        }
+        
+        public static BookSet Create()
+        {
+            return new BookSet();
+        }
+
+        public void AddBook(Book book)
+        {
+            this.Books.Add(book);
+        }
+    }
     
     public class Book
     {
@@ -92,7 +121,7 @@ namespace PotterKata
     {
         private Basket()
         {
-            this.BasketItems = new List<Book>();
+            this.BasketItems = new List<BookSet>();
         }
         
         public static Basket Create()
@@ -102,14 +131,20 @@ namespace PotterKata
 
         public void AddBook(Book book)
         {
-            BasketItems.Add(book);
+            var bookSet = BookSet.Create();
+            bookSet.AddBook(book);
+            
+            BasketItems.Add(bookSet);
         }
         
-        public List<Book> BasketItems { get; }
+        public List<BookSet> BasketItems { get; }
 
         public void AddBooks(IEnumerable<Book> books)
         {
-            BasketItems.AddRange(books);
+            foreach (var book in books)
+            {
+                AddBook(book);
+            }
         }
     }
 }
