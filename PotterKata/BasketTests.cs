@@ -19,6 +19,16 @@ namespace PotterKata
                 .BDDfy();
         }
 
+        static List<Book> books = new List<Book> { new Book(), new Book() };
+        [Test, TestCaseSource(nameof(books))]
+        public void AddingMultipleItemsToBasket(IEnumerable<Book> books)
+        {
+            this.Given(_ => An_Empty_Basket())
+                .When(_ => Books_Are_Added_To_Basket(books))
+                .Then(_ => Basket_Is_Not_Empty())
+                .BDDfy();
+        }
+
         private void An_Empty_Basket()
         {
             _subject = Basket.Create();
@@ -28,6 +38,12 @@ namespace PotterKata
         {
             _subject.AddBook(book);
         }
+
+        private void Books_Are_Added_To_Basket(IEnumerable<Book> books)
+        {
+            _subject.AddBooks(books);
+        }
+        
 
         private void Basket_Is_Not_Empty()
         {
@@ -57,5 +73,10 @@ namespace PotterKata
         }
         
         public List<Book> BasketItems { get; }
+
+        public void AddBooks(IEnumerable<Book> books)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
