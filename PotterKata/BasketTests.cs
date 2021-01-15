@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using TestStack.BDDfy;
 
@@ -26,17 +26,9 @@ namespace PotterKata
                 .When(_ => Book_Is_Added_To_Basket(new Book(HarryPotterSeries.Philosophers_Stone)))
                 .And(_ => Book_Is_Added_To_Basket(new Book(HarryPotterSeries.Philosophers_Stone)))
                 .Then(_ => Basket_Is_Not_Empty())
-                .And(_ => Basket_Contains_X_Number_Of_Items(2))
+                .And(_ => Basket_Contains_X_Number_Of_BookSets(2))
                 .And(_ => Each_BookSet_Contains_X_Number_Books(1))
                 .BDDfy();
-        }
-
-        private void Each_BookSet_Contains_X_Number_Books(int i)
-        {
-            foreach (var item in _subject.BasketItems)
-            {
-                Assert.That(item.Books.Count, Is.EqualTo(i));
-            }
         }
 
         [Test]
@@ -46,11 +38,20 @@ namespace PotterKata
             this.Given(_ => An_Empty_Basket())
                 .When(_ => Books_Are_Added_To_Basket(books))
                 .Then(_ => Basket_Is_Not_Empty())
-                .Then(_ => Basket_Contains_X_Number_Of_Items(1))
+                .And(_ => Basket_Contains_X_Number_Of_BookSets(1))
+                .And(_ => Each_BookSet_Contains_X_Number_Books(2))
                 .BDDfy();
         }
 
-        private void Basket_Contains_X_Number_Of_Items(int numberOfItems)
+        private void Each_BookSet_Contains_X_Number_Books(int numberOfBooks)
+        {
+            foreach (var item in _subject.BasketItems)
+            {
+                Assert.That(item.Books.Count, Is.EqualTo(numberOfBooks));
+            }
+        }
+
+        private void Basket_Contains_X_Number_Of_BookSets(int numberOfItems)
         {
             Assert.That(_subject.BasketItems.Count, Is.EqualTo(numberOfItems));
         }
@@ -131,10 +132,28 @@ namespace PotterKata
 
         public void AddBook(Book book)
         {
-            var bookSet = BookSet.Create();
-            bookSet.AddBook(book);
+            BookSet bookSet = null;
             
-            BasketItems.Add(bookSet);
+            foreach (var item in BasketItems)
+            {
+                var bookFound = item.Books.Any(x => x.Series == book.Series);
+
+                if (bookFound)
+                {
+                    continue;
+                }
+
+                bookSet = item;
+                break;
+            }
+
+            if (bookSet == null)
+            {
+                bookSet = BookSet.Create();
+                BasketItems.Add(bookSet);
+            }
+            
+            bookSet.AddBook(book);
         }
         
         public List<BookSet> BasketItems { get; }
