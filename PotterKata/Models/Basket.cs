@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace PotterKata.Models
 {
@@ -23,13 +22,11 @@ namespace PotterKata.Models
             
             foreach (var item in BasketItems)
             {
-                var bookFound = item.Books.Any(x => x.Series == book.Series);
-
-                if (bookFound)
+                if (item.Contains(book))
                 {
                     continue;
                 }
-
+                
                 bookSet = item;
                 break;
             }

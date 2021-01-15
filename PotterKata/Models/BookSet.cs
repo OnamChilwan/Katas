@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace PotterKata.Models
 {
@@ -19,6 +20,11 @@ namespace PotterKata.Models
         public void AddBook(Book book)
         {
             this.Books.Add(book);
+        }
+
+        public bool Contains(Book book)
+        {
+            return Books.Any(x => x.Series == book.Series);
         }
     }
 }
