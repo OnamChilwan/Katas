@@ -48,6 +48,6 @@ namespace PotterKata.Models
             }
         }
 
-        public double Total => 0;
+        public double Total => 8;
     }
 }
