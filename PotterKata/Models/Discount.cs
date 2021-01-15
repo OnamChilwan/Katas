@@ -9,7 +9,19 @@
         
         public static Discount Create(int numberOfBooks)
         {
-            return new Discount(0.95);
+            double discount = 0;
+            
+            switch (numberOfBooks)
+            {
+                case 2:
+                    discount = 0.95;
+                    break;
+                case 3:
+                    discount = 0.90;
+                    break;
+            }
+            
+            return new Discount(discount);
         }
 
         public double Rate { get; }
