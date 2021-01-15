@@ -53,7 +53,7 @@ namespace PotterKata
 
         public void AddBook(Book book)
         {
-            throw new NotImplementedException();
+            BasketItems.Add(book);
         }
         
         public List<Book> BasketItems { get; }
