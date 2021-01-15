@@ -28,21 +28,26 @@ namespace PotterKata
                 .When(_ => Book_Is_Added_To_Basket(new Book(HarryPotterSeries.Philosophers_Stone)))
                 .And(_ => Book_Is_Added_To_Basket(new Book(HarryPotterSeries.Philosophers_Stone)))
                 .Then(_ => Basket_Is_Not_Empty())
-                .And(_ => Basket_Contains_X_Number_Of_BookSets(2))
+                .And(_ => Basket_Contains_X_Number_Of_Book_Sets(2))
                 .And(_ => Each_BookSet_Contains_X_Number_Books(1))
                 .And(_ => Basket_Total_Is(16))
                 .BDDfy();
         }
 
         [Test]
-        public void AddingMultipleDifferentBooksToBasket()
+        public void AddingTwoDifferentBooksToBasket()
         {
-            var books = new List<Book> { new Book(HarryPotterSeries.Philosophers_Stone), new Book(HarryPotterSeries.Chamber_of_Secrets) };
+            var books = new List<Book>
+            {
+                new Book(HarryPotterSeries.Philosophers_Stone),
+                new Book(HarryPotterSeries.Chamber_of_Secrets)
+            };
             this.Given(_ => An_Empty_Basket())
                 .When(_ => Books_Are_Added_To_Basket(books))
                 .Then(_ => Basket_Is_Not_Empty())
-                .And(_ => Basket_Contains_X_Number_Of_BookSets(1))
+                .And(_ => Basket_Contains_X_Number_Of_Book_Sets(1))
                 .And(_ => Each_BookSet_Contains_X_Number_Books(2))
+                .And(_ => Basket_Total_Is(15.20))
                 .BDDfy();
         }
 
@@ -59,7 +64,7 @@ namespace PotterKata
             }
         }
 
-        private void Basket_Contains_X_Number_Of_BookSets(int numberOfItems)
+        private void Basket_Contains_X_Number_Of_Book_Sets(int numberOfItems)
         {
             Assert.That(_subject.BasketItems.Count, Is.EqualTo(numberOfItems));
         }
