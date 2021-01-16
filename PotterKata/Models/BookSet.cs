@@ -33,7 +33,7 @@ namespace PotterKata.Models
 
         public bool Contains(Book book)
         {
-            return Books.Any(x => x.Series == book.Series);
+            return Books.Any(x => x.Volume == book.Volume);
         }
     }
 }

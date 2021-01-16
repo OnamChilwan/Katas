@@ -4,11 +4,16 @@ namespace PotterKata.Models
 {
     public class Book
     {
-        public HarryPotterSeries Series { get; }
+        public Volumes Volume { get; }
 
-        public Book(HarryPotterSeries series)
+        public Book(Volumes volume)
         {
-            Series = series;
+            Volume = volume;
+        }
+
+        public override string ToString()
+        {
+            return this.Volume.ToString();
         }
     }
 }

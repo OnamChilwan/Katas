@@ -1,6 +1,6 @@
 ﻿namespace PotterKata.Enums
 {
-    public enum HarryPotterSeries
+    public enum Volumes
     {
         Philosophers_Stone = 1,
         Chamber_of_Secrets = 2,
