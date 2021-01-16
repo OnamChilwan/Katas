@@ -7,7 +7,7 @@ namespace PotterKata.Models
     {
         public List<BookSet> BasketItems { get; }
         
-        public double Total => BasketItems.Sum(x => x.Books.Count * 8);
+        public double Total => BasketItems.Sum(x => x.Price);
 
         private Basket()
         {
