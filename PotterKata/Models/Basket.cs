@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PotterKata.Models
@@ -21,26 +22,32 @@ namespace PotterKata.Models
 
         public void AddBook(Book book)
         {
-            BookSet bookSet = null;
+            BookSet cheapestBookSet = null;
+            var cheapestPriceSoFar = double.MaxValue; // set it to highest possible value
             
-            foreach (var item in BasketItems)
+            foreach (var bookSet in BasketItems)
             {
-                if (item.Contains(book))
+                if (bookSet.Contains(book))
+                {
+                    continue;
+                }
+
+                if (bookSet.Price > cheapestPriceSoFar)
                 {
                     continue;
                 }
                 
-                bookSet = item;
-                break;
+                cheapestBookSet = bookSet;
+                cheapestPriceSoFar = bookSet.Price;
             }
 
-            if (bookSet == null)
+            if (cheapestBookSet == null)
             {
-                bookSet = BookSet.Create();
-                BasketItems.Add(bookSet);
+                cheapestBookSet = BookSet.Create();
+                BasketItems.Add(cheapestBookSet);
             }
             
-            bookSet.AddBook(book);
+            cheapestBookSet.AddBook(book);
         }
 
         public void AddBooks(IEnumerable<Book> books)
