@@ -22,32 +22,16 @@ namespace PotterKata.Models
 
         public void AddBook(Book book)
         {
-            BookSet cheapestBookSet = null;
-            var cheapestPriceSoFar = double.MaxValue; // set it to highest possible value
-            
-            foreach (var bookSet in BasketItems)
+            if (TryDetermineCheapestBookSet(book, out BookSet bookSet))
             {
-                if (bookSet.Contains(book))
-                {
-                    continue;
-                }
-
-                if (bookSet.Price > cheapestPriceSoFar)
-                {
-                    continue;
-                }
-                
-                cheapestBookSet = bookSet;
-                cheapestPriceSoFar = bookSet.Price;
+                bookSet.AddBook(book);
             }
-
-            if (cheapestBookSet == null)
+            else
             {
-                cheapestBookSet = BookSet.Create();
-                BasketItems.Add(cheapestBookSet);
+                var newBookSet = BookSet.Create();
+                newBookSet.AddBook(book);
+                BasketItems.Add(newBookSet);
             }
-            
-            cheapestBookSet.AddBook(book);
         }
 
         public void AddBooks(IEnumerable<Book> books)
@@ -56,6 +40,23 @@ namespace PotterKata.Models
             {
                 AddBook(book);
             }
+        }
+
+        private bool TryDetermineCheapestBookSet(Book book, out BookSet cheapestBookSet)
+        {
+            cheapestBookSet = null;
+
+            foreach (var bookSet in BasketItems)
+            {
+                if (bookSet.Contains(book) || bookSet.Price > cheapestBookSet?.Price)
+                {
+                    continue;
+                }
+
+                cheapestBookSet = bookSet;
+            }
+            
+            return cheapestBookSet != null;
         }
     }
 }
