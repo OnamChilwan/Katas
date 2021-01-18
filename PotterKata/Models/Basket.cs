@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace PotterKata.Models
@@ -8,7 +7,7 @@ namespace PotterKata.Models
     {
         public List<BookSet> BasketItems { get; }
         
-        public double Total => BasketItems.Sum(x => x.Price);
+        public double Total => BasketItems.Sum(bookSet => bookSet.Price.TotalIncDiscount);
 
         private Basket()
         {
@@ -48,7 +47,7 @@ namespace PotterKata.Models
 
             foreach (var bookSet in BasketItems)
             {
-                if (bookSet.Contains(book) || bookSet.Price > cheapestBookSet?.Price)
+                if (bookSet.Contains(book) || bookSet.Price.IsMoreExpensive(cheapestBookSet?.Price))
                 {
                     continue;
                 }

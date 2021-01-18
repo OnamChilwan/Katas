@@ -122,9 +122,7 @@ namespace PotterKata
         {
             Assert.That(_subject.Total, Is.EqualTo(expectedTotal), () =>
             {
-                /* TODO:
-                    instead of this look into implementing List<T> and override ToString() for better test output.
-                    This is awful */
+                // TODO: instead of this look into implementing List<T> and override ToString() for better test output. This is awful */
                 var builder = new StringBuilder();
                 
                 foreach (var basketItem in _subject.BasketItems)
