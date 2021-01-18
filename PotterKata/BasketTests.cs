@@ -13,35 +13,38 @@ namespace PotterKata
     public class BasketTests
     {
         private Basket _subject;
-
-        [Test]
-        public void AddingSingleBookToBasket()
-        {
-            this.Given(_ => An_Empty_Basket())
-                .When(_ => Book_Is_Added_To_Basket(new Book(Volumes.Philosophers_Stone)))
-                .Then(_ => Basket_Is_Not_Empty())
-                .And(_ => Basket_Total_Is(8))
-                .BDDfy();
-        }
         
         [Test]
-        public void AddingTwoDifferentBooksToBasket()
+        public void AddingMultipleDifferentBooksToBasket()
         {
             var books = new List<Book>
             {
                 new Book(Volumes.Philosophers_Stone),
-                new Book(Volumes.Chamber_of_Secrets)
+                new Book(Volumes.Chamber_of_Secrets),
+                new Book(Volumes.Philosophers_Stone),
+                new Book(Volumes.Chamber_of_Secrets),
             };
+            
             this.Given(_ => An_Empty_Basket())
                 .When(_ => Books_Are_Added_To_Basket(books))
                 .Then(_ => Basket_Is_Not_Empty())
-                .And(_ => Basket_Contains_X_Number_Of_Book_Sets(1))
-                .And(_ => Each_BookSet_Contains_X_Number_Books(2))
-                .And(_ => Basket_Total_Is(15.20))
+                .And(_ => Basket_Contains_The_Correct_Number_Of_Book_Sets(2))
+                .And(_ => Each_BookSet_Contains_The_Correct_Number_Books(2))
                 .BDDfy();
         }
         
-        // TODO: Might be able to just use this one test or perhaps make others just verify number of book sets and books (dumber tests)
+        [Test]
+        public void AddingSameBookTwiceToBasket()
+        {
+            this.Given(_ => An_Empty_Basket())
+                .When(_ => Book_Is_Added_To_Basket(new Book(Volumes.Philosophers_Stone)))
+                .And(_ => Book_Is_Added_To_Basket(new Book(Volumes.Philosophers_Stone)))
+                .Then(_ => Basket_Is_Not_Empty())
+                .And(_ => Basket_Contains_The_Correct_Number_Of_Book_Sets(2))
+                .And(_ => Each_BookSet_Contains_The_Correct_Number_Books(1))
+                .BDDfy();
+        }
+        
         [TestCaseSource(typeof(TestData))]
         public void AddingVaryingBooksFromTheSeries(List<Book> books, double expectedCost)
         {
@@ -71,37 +74,6 @@ namespace PotterKata
                 return new object[] { series.Select(i => new Book(i)).ToList(), expectedCost };
             }
         }
-        
-        [Test]
-        public void AddingSameBookTwiceToBasket()
-        {
-            this.Given(_ => An_Empty_Basket())
-                .When(_ => Book_Is_Added_To_Basket(new Book(Volumes.Philosophers_Stone)))
-                .And(_ => Book_Is_Added_To_Basket(new Book(Volumes.Philosophers_Stone)))
-                .Then(_ => Basket_Is_Not_Empty())
-                .And(_ => Basket_Contains_X_Number_Of_Book_Sets(2))
-                .And(_ => Each_BookSet_Contains_X_Number_Books(1))
-                .And(_ => Basket_Total_Is(16))
-                .BDDfy();
-        }
-
-        private void Basket_Is_Not_Empty()
-        {
-            Assert.That(_subject.BasketItems, Is.Not.Empty);
-        }
-
-        private void Each_BookSet_Contains_X_Number_Books(int numberOfBooks)
-        {
-            foreach (var item in _subject.BasketItems)
-            {
-                Assert.That(item.Books.Count, Is.EqualTo(numberOfBooks));
-            }
-        }
-
-        private void Basket_Contains_X_Number_Of_Book_Sets(int numberOfItems)
-        {
-            Assert.That(_subject.BasketItems.Count, Is.EqualTo(numberOfItems));
-        }
 
         private void An_Empty_Basket()
         {
@@ -113,9 +85,27 @@ namespace PotterKata
             _subject.AddBook(book);
         }
 
+        private void Basket_Is_Not_Empty()
+        {
+            Assert.That(_subject.BasketItems, Is.Not.Empty);
+        }
+
         private void Books_Are_Added_To_Basket(IEnumerable<Book> books)
         {
             _subject.AddBooks(books);
+        }
+
+        private void Each_BookSet_Contains_The_Correct_Number_Books(int numberOfBooks)
+        {
+            foreach (var item in _subject.BasketItems)
+            {
+                Assert.That(item.Books.Count, Is.EqualTo(numberOfBooks));
+            }
+        }
+
+        private void Basket_Contains_The_Correct_Number_Of_Book_Sets(int numberOfItems)
+        {
+            Assert.That(_subject.BasketItems.Count, Is.EqualTo(numberOfItems));
         }
 
         private void Basket_Total_Is(double expectedTotal)
