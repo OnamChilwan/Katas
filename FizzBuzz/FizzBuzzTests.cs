@@ -13,6 +13,16 @@ namespace FizzBuzz
 
             Assert.That(result, Is.EqualTo("Fizz"));
         }
+
+        [Test]
+        public void When_Number_Is_Divisible_By_Five_Then_Buzz()
+        {
+            var subject = new Kata();
+            var result = subject.Execute(5);
+
+            Assert.That(result, Is.EqualTo("Buzz"));
+        }
+        
     }
 
     public class Kata
@@ -22,5 +32,4 @@ namespace FizzBuzz
             return "Fizz";
         }
     }
-
 }
