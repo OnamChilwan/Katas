@@ -5,9 +5,23 @@ namespace PotterKata.Models
 {
     public class Basket
     {
+        private bool _buyOneGetOneFreeApplied;
         public List<BookSet> BasketItems { get; }
         
-        public double Total => BasketItems.Sum(bookSet => bookSet.Price.TotalIncDiscount);
+        public double Total
+        {
+            get
+            {
+                var total = BasketItems.Sum(bookSet => bookSet.Price.TotalIncDiscount);
+
+                if (_buyOneGetOneFreeApplied)
+                {
+                    total = total / 2;
+                }
+                
+                return total;
+            }
+        }
 
         private Basket()
         {
@@ -38,6 +52,20 @@ namespace PotterKata.Models
             foreach (var book in books)
             {
                 AddBook(book);
+            }
+        }
+
+        public void ApplyOffer()
+        {
+            _buyOneGetOneFreeApplied = true;
+            var copy = new List<BookSet>(BasketItems);
+            
+            for (var i = 0; i< copy.Count; i++)
+            {
+                foreach (var book in copy[i].Books)
+                {
+                    AddBook(book);
+                }
             }
         }
 

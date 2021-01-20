@@ -13,6 +13,21 @@ namespace PotterKata
     public class BasketTests
     {
         private Basket _subject;
+
+        [Test]
+        public void BuyingTwoBooksBuyOneGetOneFreeOffer()
+        {
+            var book = new Book(Volumes.Chamber_of_Secrets);
+            
+            this.Given(_ => An_Empty_Basket())
+                .When(_ => Book_Is_Added_To_Basket(book))
+                .And(_ => Buy_One_Get_One_Free_Offer_Is_Applied())
+                .Then(_ => Basket_Is_Not_Empty())
+                .And(_ => Basket_Contains_The_Correct_Number_Of_Book_Sets(2))
+                .And(_ => Each_BookSet_Contains_The_Correct_Number_Books(1))
+                .And(_ => Basket_Total_Is(8))
+                .BDDfy();
+        }
         
         [Test]
         public void AddingMultipleDifferentBooksToBasket()
@@ -32,7 +47,7 @@ namespace PotterKata
                 .And(_ => Each_BookSet_Contains_The_Correct_Number_Books(2))
                 .BDDfy();
         }
-        
+
         [Test]
         public void AddingSameBookTwiceToBasket()
         {
@@ -44,7 +59,7 @@ namespace PotterKata
                 .And(_ => Each_BookSet_Contains_The_Correct_Number_Books(1))
                 .BDDfy();
         }
-        
+
         [TestCaseSource(typeof(TestData))]
         public void AddingVaryingBooksFromTheSeries(List<Book> books, double expectedCost)
         {
@@ -54,7 +69,7 @@ namespace PotterKata
                 .And(_ => Basket_Total_Is(expectedCost))
                 .BDDfy();
         }
-        
+
         class TestData : IEnumerable
         {
             public IEnumerator GetEnumerator()
@@ -83,6 +98,11 @@ namespace PotterKata
         private void Book_Is_Added_To_Basket(Book book)
         {
             _subject.AddBook(book);
+        }
+
+        private void Buy_One_Get_One_Free_Offer_Is_Applied()
+        {
+            _subject.ApplyOffer();
         }
 
         private void Basket_Is_Not_Empty()
