@@ -7,12 +7,11 @@ namespace PotterKata.Models
     {
         public List<Book> Books { get; }
 
-        public BookSetPrice Price { get; }
+        public double Price => new BookSetPrice(Books).TotalIncDiscount;
         
         private BookSet()
         {
             Books = new List<Book>();
-            Price = new BookSetPrice(Books);
         }
         
         public static BookSet Create()

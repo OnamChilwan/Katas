@@ -29,7 +29,10 @@ namespace FizzBuzz
     {
         public string Execute(int number)
         {
-            return "Fizz";
+            if (number % 3 == 0) return "Fizz";
+            //if (number)
+
+            return "";
         }
     }
 }

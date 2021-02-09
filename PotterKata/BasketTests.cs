@@ -22,13 +22,12 @@ namespace PotterKata
             this.Given(_ => An_Empty_Basket())
                 .When(_ => Book_Is_Added_To_Basket(book))
                 .And(_ => Buy_One_Get_One_Free_Offer_Is_Applied())
-                .Then(_ => Basket_Is_Not_Empty())
-                .And(_ => Basket_Contains_The_Correct_Number_Of_Book_Sets(2))
+                .Then(_ => Basket_Contains_The_Correct_Number_Of_Book_Sets(2))
                 .And(_ => Each_BookSet_Contains_The_Correct_Number_Books(1))
                 .And(_ => Basket_Total_Is(8))
                 .BDDfy();
         }
-        
+
         [Test]
         public void AddingMultipleDifferentBooksToBasket()
         {
@@ -52,8 +51,8 @@ namespace PotterKata
         public void AddingSameBookTwiceToBasket()
         {
             this.Given(_ => An_Empty_Basket())
-                .When(_ => Book_Is_Added_To_Basket(new Book(Volumes.Philosophers_Stone)))
-                .And(_ => Book_Is_Added_To_Basket(new Book(Volumes.Philosophers_Stone)))
+                .When(_ => Book_Is_Added_To_Basket(new Book(Volumes.Philosophers_Stone, 8)))
+                .And(_ => Book_Is_Added_To_Basket(new Book(Volumes.Philosophers_Stone, 8)))
                 .Then(_ => Basket_Is_Not_Empty())
                 .And(_ => Basket_Contains_The_Correct_Number_Of_Book_Sets(2))
                 .And(_ => Each_BookSet_Contains_The_Correct_Number_Books(1))
