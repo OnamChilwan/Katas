@@ -22,15 +22,25 @@ namespace FizzBuzz
 
             Assert.That(result, Is.EqualTo("Buzz"));
         }
-        
+
+        [TestCase(15)]
+        [TestCase(30)]
+        public void When_Number_Is_Divisible_By_Three_And_Five_Then_FizzBuzz(int value)
+        {
+            var subject = new Kata();
+            var result = subject.Execute(value);
+
+            Assert.That(result, Is.EqualTo("FizzBuzz"));
+        }
     }
 
     public class Kata
     {
         public string Execute(int number)
         {
+            if (number % 3 == 0 && number % 5 == 0) return "FizzBuzz";
             if (number % 3 == 0) return "Fizz";
-            //if (number)
+            if (number % 5 == 0) return "Buzz";
 
             return "";
         }
