@@ -1,3 +1,4 @@
+using System.Collections;
 using NUnit.Framework;
 
 namespace FizzBuzz
@@ -8,8 +9,7 @@ namespace FizzBuzz
         [Test]
         public void When_Number_Is_Divisible_By_Three_Then_Fizz()
         {
-            var subject = new Kata();
-            var result = subject.Execute(3);
+            var result = Kata.Execute(3);
 
             Assert.That(result, Is.EqualTo("Fizz"));
         }
@@ -17,8 +17,7 @@ namespace FizzBuzz
         [Test]
         public void When_Number_Is_Divisible_By_Five_Then_Buzz()
         {
-            var subject = new Kata();
-            var result = subject.Execute(5);
+            var result = Kata.Execute(5);
 
             Assert.That(result, Is.EqualTo("Buzz"));
         }
@@ -27,8 +26,7 @@ namespace FizzBuzz
         [TestCase(30)]
         public void When_Number_Is_Divisible_By_Three_And_Five_Then_FizzBuzz(int value)
         {
-            var subject = new Kata();
-            var result = subject.Execute(value);
+            var result = Kata.Execute(value);
 
             Assert.That(result, Is.EqualTo("FizzBuzz"));
         }
@@ -36,13 +34,23 @@ namespace FizzBuzz
 
     public class Kata
     {
-        public string Execute(int number)
+        public static string Execute(int number)
         {
-            if (number % 3 == 0 && number % 5 == 0) return "FizzBuzz";
-            if (number % 3 == 0) return "Fizz";
-            if (number % 5 == 0) return "Buzz";
+            var output = string.Empty;
+            output += DivisibleByThree(number);
+            output += DivisibleByFive(number);
 
-            return "";
+            return output;
+        }
+
+        private static string DivisibleByThree(int number)
+        {
+            return number % 3 == 0 ? "Fizz" : string.Empty;
+        }
+        
+        private static string DivisibleByFive(int number)
+        {
+            return number % 5 == 0 ? "Buzz" : string.Empty;
         }
     }
 }
